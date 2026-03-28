@@ -7,10 +7,12 @@
 		"test": "vitest run",
 		"test-watch": "vitest",
 		"test-ui": "vitest --ui",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"prepare": "panda codegen"
 	},
 	"type": "module",
 	"devDependencies": {
+		"@pandacss/dev": "^1.9.1",
 		"@solidjs/meta": "^0.29.4",
 		"@solidjs/router": "^0.16.1",
 		"@solidjs/start": "2.0.0-alpha.2",
@@ -19,6 +21,7 @@
 		"@testing-library/user-event": "^14.6.1",
 		"@vitest/ui": "^4.1.2",
 		"jsdom": "^29.0.1",
+		"postcss": "^8.5.8",
 		"solid-js": "^1.9.12",
 		"typescript": "^6.0.2",
 		"vite": "^8.0.3",
