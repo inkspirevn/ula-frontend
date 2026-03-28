@@ -8,11 +8,8 @@ import {
 	Show,
 	splitProps,
 } from "solid-js";
-import { styled } from "../../../styled-system/jsx";
-import {
-	type ButtonVariantProps,
-	button,
-} from "../../../styled-system/recipes";
+import { styled } from "styled-system/jsx";
+import { type ButtonVariantProps, button } from "styled-system/recipes";
 import { Group, type GroupProps } from "./group";
 import { Loader } from "./loader";
 

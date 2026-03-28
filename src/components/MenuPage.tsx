@@ -1,15 +1,14 @@
 import { ResponsiveImage } from "@responsive-image/solid";
 import { ChevronLeft, ChevronRight, LayoutGrid, X } from "lucide-solid";
 import { createEffect, createSignal, For, onCleanup, Show } from "solid-js";
+import { flipbookShell } from "styled-system/recipes";
 import img1 from "~/assets/1.png?responsive";
 import img2 from "~/assets/2.png?responsive";
 import img3 from "~/assets/3.png?responsive";
 import img4 from "~/assets/4.png?responsive";
-
 import { Button } from "~/components/ui/button";
 import * as Drawer from "~/components/ui/drawer";
 import { IconButton } from "~/components/ui/icon-button";
-import { flipbookShell } from "../../styled-system/recipes";
 
 const images = [img1, img2, img3, img4];
 const totalPages = images.length;

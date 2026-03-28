@@ -5,8 +5,13 @@ import { defineConfig } from "vite";
 
 export default defineConfig(async ({ command }) => {
 	return {
+		resolve: {
+			alias: {
+				"styled-system": "/styled-system",
+			},
+		},
 		plugins: [
-			solidStart({ ssr: false }),
+			solidStart(),
 			nitroV2Plugin(),
 			setupPlugins({
 				include: /^[^?]+\.(?:jpg|jpeg|png|webp)\?.*responsive.*$/i,
