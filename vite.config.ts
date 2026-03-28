@@ -15,7 +15,7 @@ export default defineConfig(async ({ command }) => {
 			nitroV2Plugin(),
 			setupPlugins({
 				include: /^[^?]+\.(?:jpg|jpeg|png|webp)\?.*responsive.*$/i,
-				formats:
+				format:
 					command === "build"
 						? ["avif", "webp", "original"]
 						: ["webp", "original"],
