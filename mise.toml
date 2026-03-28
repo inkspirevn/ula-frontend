@@ -1,0 +1,4 @@
+[tools]
+bun = "latest"
+fnox = "latest"
+prek = { version = "latest", postinstall = "prek install" }

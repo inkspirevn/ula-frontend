@@ -1,0 +1,49 @@
+exclude = { glob = [".agents/skills/**"] }
+
+# Shell
+[[repos]]
+repo = "https://github.com/koalaman/shellcheck-precommit"
+rev = "v0.11.0"
+hooks = [{ id = "shellcheck" }]
+
+[[repos]]
+repo = "https://github.com/scop/pre-commit-shfmt"
+rev = "v3.13.0-1"
+hooks = [{ id = "shfmt" }]
+
+# SQL
+[[repos]]
+repo = "https://github.com/concur1/sqruff-pre-commit"
+rev = "v0.37.3"
+hooks = [
+  { id = "sqruff-fix" },
+  { id = "sqruff-lint" },
+]
+
+# Web, config
+[[repos]]
+repo = "https://github.com/reteps/dockerfmt"
+rev = "v0.3.9"
+hooks = [{ id = "dockerfmt" }]
+
+[[repos]]
+repo = "https://github.com/biomejs/pre-commit"
+rev = "v2.4.9"
+hooks = [{ id = "biome-check" }]
+
+[[repos]]
+repo = "https://github.com/tombi-toml/tombi-pre-commit"
+rev = "v0.9.9"
+hooks = [
+  { id = "tombi-format" },
+  { id = "tombi-lint" },
+]
+
+# Docs
+[[repos]]
+repo = "https://github.com/rvben/rumdl-pre-commit"
+rev = "v0.1.60"
+hooks = [
+  { id = "rumdl-fmt" },
+  { id = "rumdl" },
+]
