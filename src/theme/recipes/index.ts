@@ -1,8 +1,10 @@
 import { absoluteCenter } from "./absolute-center";
 import { button } from "./button";
 import { drawer } from "./drawer";
+import { flipbookShell } from "./flipbook-shell";
 import { group } from "./group";
 import { spinner } from "./spinner";
+
 export const recipes = {
 	button,
 	drawer,
@@ -10,4 +12,6 @@ export const recipes = {
 	absoluteCenter,
 	spinner,
 };
-export const slotRecipes = {};
+export const slotRecipes = {
+	flipbookShell,
+};

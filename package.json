@@ -32,6 +32,7 @@
 	"dependencies": {
 		"@ark-ui/solid": "^5.35.0",
 		"@responsive-image/solid": "^2.0.4",
-		"@solidjs/vite-plugin-nitro-2": "^0.1.0"
+		"@solidjs/vite-plugin-nitro-2": "^0.1.0",
+		"lucide-solid": "^1.7.0"
 	}
 }

@@ -8,8 +8,11 @@ import {
 	Show,
 	splitProps,
 } from "solid-js";
-import { styled } from "styled-system/jsx";
-import { type ButtonVariantProps, button } from "styled-system/recipes";
+import { styled } from "../../../styled-system/jsx";
+import {
+	type ButtonVariantProps,
+	button,
+} from "../../../styled-system/recipes";
 import { Group, type GroupProps } from "./group";
 import { Loader } from "./loader";
 
@@ -37,7 +40,9 @@ interface ButtonLoadingProps {
 type BaseButtonProps = ComponentProps<typeof BaseButton>;
 const BaseButton = styled(ark.button, button);
 
-export interface ButtonProps extends BaseButtonProps, ButtonLoadingProps {}
+export interface ButtonProps extends BaseButtonProps, ButtonLoadingProps {
+	children?: JSX.Element;
+}
 
 export const Button = (props: ButtonProps) => {
 	const propsContext = useButtonPropsContext();

@@ -1,5 +1,5 @@
 import { type JSX, splitProps } from "solid-js";
-import type { HTMLStyledProps } from "styled-system/jsx";
+import type { HTMLStyledProps } from "../../../styled-system/jsx";
 import { AbsoluteCenter } from "./absolute-center";
 import { Span } from "./span";
 import { Spinner } from "./spinner";

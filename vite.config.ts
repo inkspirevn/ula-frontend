@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 export default defineConfig(async ({ command }) => {
 	return {
 		plugins: [
-			solidStart(),
+			solidStart({ ssr: false }),
 			nitroV2Plugin(),
 			setupPlugins({
 				include: /^[^?]+\.(?:jpg|jpeg|png|webp)\?.*responsive.*$/i,

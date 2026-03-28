@@ -1,18 +1,6 @@
-import Counter from "~/components/Counter";
+import MenuPage from "~/components/MenuPage";
 import "./index.css";
 
 export default function Home() {
-	return (
-		<main>
-			<h1>Hello world!</h1>
-			<Counter />
-			<p>
-				Visit{" "}
-				<a href="https://solidjs.com" target="_blank" rel="noopener">
-					solidjs.com
-				</a>{" "}
-				to learn how to build Solid apps.
-			</p>
-		</main>
-	);
+	return <MenuPage />;
 }

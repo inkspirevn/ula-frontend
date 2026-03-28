@@ -18,6 +18,7 @@ import { zIndex } from "~/theme/tokens/z-index";
 export default defineConfig({
 	// Whether to use css reset
 	preflight: true,
+	jsxFramework: "solid",
 
 	// Where to look for your css declarations
 	include: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}"],
