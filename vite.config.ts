@@ -12,7 +12,7 @@ export default defineConfig(async ({ command }) => {
 		},
 		plugins: [
 			solidStart(),
-			nitroV2Plugin(),
+			nitroV2Plugin({ preset: "vercel" }),
 			setupPlugins({
 				include: /^[^?]+\.(?:jpg|jpeg|png|webp)\?.*responsive.*$/i,
 				format:
