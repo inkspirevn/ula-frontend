@@ -29,6 +29,7 @@
 		"vitest": "^4.1.2"
 	},
 	"dependencies": {
+		"@ark-ui/solid": "^5.35.0",
 		"@solidjs/vite-plugin-nitro-2": "^0.1.0"
 	}
 }
