@@ -13,6 +13,7 @@
 	"type": "module",
 	"devDependencies": {
 		"@pandacss/dev": "^1.9.1",
+		"@responsive-image/vite-plugin": "^2.0.2",
 		"@solidjs/meta": "^0.29.4",
 		"@solidjs/router": "^0.16.1",
 		"@solidjs/start": "2.0.0-alpha.2",
@@ -30,6 +31,7 @@
 	},
 	"dependencies": {
 		"@ark-ui/solid": "^5.35.0",
+		"@responsive-image/solid": "^2.0.4",
 		"@solidjs/vite-plugin-nitro-2": "^0.1.0"
 	}
 }
