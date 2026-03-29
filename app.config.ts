@@ -17,6 +17,9 @@ export default defineConfig({
 				setupPlugins({
 					include:
 						/^[^?]+\.(avif|gif|heif|jpeg|jpg|png|tiff|webp)\?.*responsive.*$/,
+					format: ["avif", "webp"],
+					w: [640, 1080, 1920, 2048],
+					lqip: { type: "thumbhash" },
 				}),
 			],
 		};
