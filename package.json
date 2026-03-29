@@ -22,6 +22,7 @@
 		"@testing-library/user-event": "^14.6.1",
 		"@vitest/ui": "^4.1.2",
 		"jsdom": "^29.0.1",
+		"nitro": "3.0.260311-beta",
 		"postcss": "^8.5.8",
 		"solid-js": "^1.9.12",
 		"typescript": "^6.0.2",
@@ -32,7 +33,6 @@
 	"dependencies": {
 		"@ark-ui/solid": "^5.35.0",
 		"@responsive-image/solid": "^2.0.4",
-		"@solidjs/vite-plugin-nitro-2": "^0.1.0",
 		"lucide-solid": "^1.7.0"
 	}
 }

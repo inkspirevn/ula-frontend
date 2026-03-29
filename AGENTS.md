@@ -16,7 +16,7 @@ This project is a high-performance, responsive flipbook application for menu ima
 
 Implementation uses images 1.png through 4.png in `src/assets/`.
 
-- Core Engine (CRITICAL): Do NOT use external JS physics/animation libraries (e.g., StPageFlip, turn.js) or Canvas/WebGL. The flip effect MUST be built using Pure CSS 3D transforms (`perspective`, `rotateY(-180deg)`, `transform-origin: left`, `backface-visibility`).
+- Core Engine (CRITICAL): Do NOT use external JS physics/animation libraries (e.g., StPageFlip, turn.js) or Canvas/WebGL. The flip effect MUST be built using Pure CSS 3D transforms.
 - Layout Rules: Desktop uses a centered stage with 2-page spreads for middle pages. Mobile strictly uses a single-page view.
 - State: Logic handled via SolidJS signals. Keyboard handling implemented for Left/Right, Home/End.
 - Styling & Shell: Navigation shell, drawers, and bottom sheets use Park UI components.
@@ -35,5 +35,6 @@ Markdown files in `docs/v1/` act as indices to external documentation URLs.
 - Minimalism: Focus strictly on the UI spec structure. No extra decorative CSS beyond the spec.
 - Accessibility & Motion: Interactive targets must be minimum 44x44px. Must respect `prefers-reduced-motion` (fallback to CSS fade/opacity transition or instant swap).
 - Separation of Concerns: SolidJS handles state/logic. ResponsiveImage handles asset markup. CSS 3D handles the flip visual. Park UI/PandaCSS handles the shell.
-- Layout stability: Use explicit flex-direction row or CSS grid columns for desktop spreads to prevent vertical stacking.
-- Viewport limits: Apply strict max-height (e.g., 100vh, 100dvh) and object-fit contain to all image wrappers to prevent overflow and scrolling.
+- Layout Stability: Desktop spreads must remain horizontally aligned under all conditions without vertical wrapping.
+- Viewport Limits: The entire flipbook stage and images must be strictly constrained within the viewport height to prevent page scrolling.
+- Coding Standards: Enforce strict TypeScript typing (no any). Avoid magic numbers or hardcoded styles; utilize PandaCSS tokens and theme variables exclusively.

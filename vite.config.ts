@@ -1,6 +1,6 @@
 import { setupPlugins } from "@responsive-image/vite-plugin";
 import { solidStart } from "@solidjs/start/config";
-import { nitroV2Plugin } from "@solidjs/vite-plugin-nitro-2";
+import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig(async ({ command }) => {
@@ -12,13 +12,12 @@ export default defineConfig(async ({ command }) => {
 		},
 		plugins: [
 			solidStart(),
-			nitroV2Plugin({ preset: "vercel" }),
+			nitro({ prerender: { crawlLinks: true } }),
 			setupPlugins({
 				include: /^[^?]+\.(?:jpg|jpeg|png|webp)\?.*responsive.*$/i,
-				format:
-					command === "build"
-						? ["avif", "webp", "original"]
-						: ["webp", "original"],
+				...(command === "build"
+					? { format: ["avif", "webp", "original"] }
+					: {}),
 			}),
 		],
 	};

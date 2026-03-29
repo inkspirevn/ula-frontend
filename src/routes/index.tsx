@@ -1,6 +1,5 @@
-import MenuPage from "~/components/MenuPage";
-import "./index.css";
+import { Navigate } from "@solidjs/router";
 
 export default function Home() {
-	return <MenuPage />;
+	return <Navigate href="/menu/home_style" />;
 }

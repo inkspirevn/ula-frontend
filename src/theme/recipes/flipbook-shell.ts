@@ -44,14 +44,14 @@ export const flipbookShell = defineSlotRecipe({
 			w: "full",
 			minHeight: 0, // Critical for flexbox overflow
 			padding: "20px",
-			overflow: "hidden",
+			perspective: "2000px",
+			perspectiveOrigin: "center center",
 		},
 		stageInner: {
 			position: "relative",
 			width: "100%",
 			height: "100%",
 			maxWidth: "1400px",
-			perspective: "2000px",
 			transformStyle: "preserve-3d",
 			display: "flex",
 			justifyContent: "center",
@@ -64,21 +64,22 @@ export const flipbookShell = defineSlotRecipe({
 			top: 0,
 			right: 0,
 			transformStyle: "preserve-3d",
-			transition:
-				"transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1), z-index 0s",
+			transition: "transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1)",
 			transformOrigin: "left center",
 			zIndex: "var(--z-index)",
 			transform: "rotateY(0deg)", // Initial state
+			backfaceVisibility: "hidden",
+			background: "transparent",
 			_motionReduce: {
-				transition: "opacity 0.3s",
+				transition: "none",
 			},
 			"&[data-turned='true']": {
 				transform: "rotateY(-180deg)",
+				zIndex: "var(--z-index)",
 				transition:
 					"transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1), z-index 0s 0.3s",
 				_motionReduce: {
-					transform: "none",
-					opacity: 0,
+					transition: "none", // Instant swap for reduced motion
 				},
 			},
 		},

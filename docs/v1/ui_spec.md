@@ -2,30 +2,23 @@
 
 ## Navigation model
 
-- Primary control: `Prev` and `Next` buttons, always visible.
-- Secondary control: thumbnail/page picker for direct jump.
-- Do not use a seek bar as the default nav.
+- Primary control: `Prev` and `Next` buttons for sequential reading, always visible.
+- Secondary control: Table of Contents (ToC) approach using named labels and thumbnails for direct category jumps.
+- Do not use a simple seek bar. Menu readers rely on category names, not raw page numbers.
 
 ## Desktop
 
 - Layout: centered flipbook stage for 2-page horizontal spreads. Pages must never wrap vertically. Entire stage must fit strictly within viewport height with no scrolling.
-- Header: document title, `Pages`, `Plain view`, `Close/Back`. `Plain view` is important because v1 uses full-image slides with text baked into images.
+- Header: document title, `Pages`, `Plain view`, `Close/Back`.
 - Stage controls: left `Prev` button, right `Next` button. Controls must stay visible and not be hidden behind hover-only affordances.
-- Bottom rail: 4 thumbnails or 4 labeled page chips. Recommended labels: `Cover`, `Menu Cover`, `Spread 1`, `Spread 2/Back` depending on your final page map.
-- Optional `Pages` panel: opens as a drawer or popover, not a permanent sidebar in v1.
+- Bottom rail: Use labeled chips (with optional thumbnails) for quick category jumps. Required naming convention uses sections like `Cover`, `Starters`, `Mains`, `Drinks` rather than page numbers.
+- `Pages` panel: Functions as a full Table of Contents. Opens as a drawer containing named thumbnails.
 
 ## Mobile
 
 - Default mode: single-page view. Image must scale to fit remaining viewport height without scrolling.
 - Sticky bottom bar: `Prev` | `1 / N` | `Next` | `Pages`.
-- `Pages` opens a bottom sheet with thumbnails. No fixed sidebar.
-- Swipe can exist as an enhancement, but buttons remain mandatory.
-
-## State rules
-
-- First page: single-page cover mode.
-- Middle pages: 2-page spread mode on desktop, single-page mode on mobile.
-- Last page: single-page end mode.
+- `Pages` opens a bottom sheet functioning as a Table of Contents with named thumbnails for direct category jumps.
 
 ## Accessibility and motion
 
@@ -33,6 +26,12 @@
 - Reduced motion: if `prefers-reduced-motion: reduce`, replace 3D turn with fade or instant update.
 - Control targets: aim for about 44×44 CSS px on touch devices.
 - Contrast: if controls sit on top of images, add a semi-opaque background or scrim so controls stay readable on all pages.
+
+## State rules
+
+- First page: single-page cover mode.
+- Middle pages: 2-page spread mode on desktop, single-page mode on mobile.
+- Last page: single-page end mode.
 
 ## Implementation fit
 
