@@ -1,21 +1,19 @@
 {
 	"compilerOptions": {
+		// Core & Bundler
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "bundler",
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
+		"noEmit": true, // SolidStart handles the file generation
+		"skipLibCheck": true,
+		"strict": true,
+		"verbatimModuleSyntax": true,
+		// SolidJS
+		"allowJs": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"allowJs": true,
-		"strict": true,
-		"noEmit": true,
-		"types": [
-			"vinxi/types/client",
-			"vitest/globals",
-			"@testing-library/jest-dom"
-		],
-		"isolatedModules": true,
 		"paths": {
 			"~/*": ["./src/*"]
 		}

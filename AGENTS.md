@@ -6,7 +6,7 @@ This project is a high-performance, responsive flipbook application for menu ima
 
 ## Tech Stack
 
-- SolidStart v2: Framework for routing, state, and build boundaries.
+- SolidStart v1: Framework for routing, state, and build boundaries.
 - PandaCSS: Build-time CSS-in-JS using recipes and slot recipes.
 - [Park UI](https://raw.githubusercontent.com/chakra-ui/park-ui/refs/heads/main/components/solid/registry.json): Component library (built on Ark UI + PandaCSS) to construct the accessible UI shell (Drawer, Bottom Sheet, Buttons). The reference is a long json, combine `curl` to fetch and `jq` to read. Use `bunx @park-ui/cli add <component_name>` to add a component.
 - ResponsiveImage: Component for optimized, responsive image delivery.

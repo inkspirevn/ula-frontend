@@ -1,4 +1,4 @@
-name: Deploy SolidStart to GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
       - run: bun run build
         env:
           NITRO_PRESET: github_pages
-          NITRO_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}/
+          NITRO_APP_BASE_URL: ${{ steps.pages.outputs.base_path }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: ./.output/public

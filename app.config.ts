@@ -2,7 +2,7 @@ import { setupPlugins } from "@responsive-image/vite-plugin";
 import { defineConfig } from "@solidjs/start/config";
 
 export default defineConfig({
-	vite({ router }) {
+	vite({ router }: { router: "server" | "client" | "server-function" }) {
 		if (router === "server") {
 		} else if (router === "client") {
 		} else if (router === "server-function") {
@@ -22,10 +22,10 @@ export default defineConfig({
 		};
 	},
 	server: {
+		// Vinxi maps `NITRO_APP_BASE_URL` to `import.meta.env.SERVER_BASE_URL`
 		baseURL: process.env.NITRO_APP_BASE_URL || "/",
 		prerender: {
-			// crawlLinks: true,
-			routes: ["/menu/home_style"], // # TODO
+			crawlLinks: true,
 			failOnError: true,
 		},
 	},
