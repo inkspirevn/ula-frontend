@@ -1,5 +1,5 @@
-import { Navigate } from "@solidjs/router";
+import { A } from "@solidjs/router";
 
 export default function Home() {
-	return <Navigate href="/menu/home_style" />;
+	return <A href="/menu/home_style" />;
 }

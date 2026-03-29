@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "bundler",
@@ -11,7 +10,11 @@
 		"allowJs": true,
 		"strict": true,
 		"noEmit": true,
-		"types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
+		"types": [
+			"vinxi/types/client",
+			"vitest/globals",
+			"@testing-library/jest-dom"
+		],
 		"isolatedModules": true,
 		"paths": {
 			"~/*": ["./src/*"]
