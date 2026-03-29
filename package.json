@@ -1,5 +1,5 @@
 {
-	"name": "example-with-vitest",
+	"name": "@inkspirevn/ula-frontend",
 	"scripts": {
 		"dev": "vinxi dev",
 		"build": "vinxi build",
