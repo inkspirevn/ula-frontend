@@ -24,7 +24,8 @@ export default defineConfig({
 	server: {
 		baseURL: process.env.NITRO_APP_BASE_URL || "/",
 		prerender: {
-			crawlLinks: true,
+			// crawlLinks: true,
+			routes: ["/menu/home_style"], // # TODO
 			failOnError: true,
 		},
 	},
