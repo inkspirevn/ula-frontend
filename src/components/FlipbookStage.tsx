@@ -9,6 +9,7 @@ import {
 	onCleanup,
 	Show,
 } from "solid-js";
+import { css } from "styled-system/css";
 import { flipbookShell } from "styled-system/recipes";
 import { Button } from "~/components/ui/button";
 import * as Drawer from "~/components/ui/drawer";
@@ -17,6 +18,7 @@ import { IconButton } from "~/components/ui/icon-button";
 interface FlipbookStageProps {
 	title: string;
 	images: ImageData[];
+	toc: { label: string; pageIndex: number }[];
 }
 
 export default function FlipbookStage(props: FlipbookStageProps) {
@@ -39,6 +41,7 @@ export default function FlipbookStage(props: FlipbookStageProps) {
 	const getPageIndexFromSpread = (s: number) => (s === 0 ? 0 : s * 2 - 1);
 
 	createEffect(() => {
+		// Keep logic only, CSS handles rendering natively
 		const mediaQuery = window.matchMedia("(min-width: 768px)");
 		setIsDesktop(mediaQuery.matches);
 		const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
@@ -79,88 +82,103 @@ export default function FlipbookStage(props: FlipbookStageProps) {
 		onCleanup(() => window.removeEventListener("keydown", handleKeyDown));
 	});
 
+	const [drawerOpen, setDrawerOpen] = createSignal(false);
 	const classes = flipbookShell();
 
 	return (
-		<div class={classes.root}>
-			<header class={classes.header}>
-				<div>
-					<h1 style={{ "font-size": "1.25rem", "font-weight": "bold" }}>
-						{props.title}
-					</h1>
-				</div>
-				<div style={{ display: "flex", gap: "8px" }}>
-					<Drawer.Root>
-						<Drawer.Trigger
-							asChild={(triggerProps: unknown) => (
-								<Button
-									variant="outline"
-									size="sm"
-									{...(triggerProps as Record<string, unknown>)}
-								>
-									<LayoutGrid size={16} /> Pages
-								</Button>
-							)}
-						/>
-						<Drawer.Backdrop />
-						<Drawer.Positioner>
-							<Drawer.Content>
-								<Drawer.Header>
-									<Drawer.Title>Navigation</Drawer.Title>
-									<Drawer.CloseTrigger
-										asChild={(closeProps: unknown) => (
-											<IconButton
-												variant="plain"
-												size="sm"
-												{...(closeProps as Record<string, unknown>)}
-											>
-												<X />
-											</IconButton>
-										)}
-									/>
-								</Drawer.Header>
-								<Drawer.Body>
-									<div
-										style={{
-											display: "flex",
-											"flex-direction": "column",
-											gap: "12px",
-											padding: "16px 0",
-										}}
-									>
-										<For each={images()}>
-											{(_, index) => (
-												<Button
-													variant={
-														pageIndex() === index() ? "solid" : "outline"
-													}
-													onClick={() => {
-														setPageIndex(index());
-														// Close drawer on selection logic could be added here if needed
-													}}
-													style={{ "justify-content": "flex-start" }}
-												>
-													Page {index() + 1}
-												</Button>
-											)}
-										</For>
-									</div>
-								</Drawer.Body>
-							</Drawer.Content>
-						</Drawer.Positioner>
-					</Drawer.Root>
-				</div>
-			</header>
+		<Drawer.Root
+			open={drawerOpen()}
+			onOpenChange={(e) => setDrawerOpen(e.open)}
+		>
+			<div class={classes.root}>
+				<header class={classes.header}>
+					<div
+						class={css({
+							display: { base: "none", md: "flex" },
+							width: "100%",
+							justifyContent: "space-between",
+							alignItems: "center",
+						})}
+					>
+						<h1 style={{ "font-size": "1.25rem", "font-weight": "bold" }}>
+							{props.title}
+						</h1>
+						<Button
+							variant="outline"
+							size="sm"
+							onClick={() => setDrawerOpen(true)}
+						>
+							<LayoutGrid size={16} /> Pages
+						</Button>
+					</div>
 
-			<main class={classes.stage}>
-				<Show
-					when={isDesktop()}
-					fallback={
-						<div class={classes.mobileStageInner}>
-							<ResponsiveImage src={images()[pageIndex()]} />
-						</div>
-					}
-				>
+					<div class={css({ display: { base: "flex", md: "none" } })}>
+						<IconButton
+							aria-label="Close"
+							variant="plain"
+							onClick={() => window.history.back()}
+							style={{
+								background: "rgba(0,0,0,0.4)",
+								color: "white",
+								"border-radius": "50%",
+							}}
+						>
+							<X />
+						</IconButton>
+					</div>
+				</header>
+
+				<Drawer.Backdrop />
+				<Drawer.Positioner>
+					<Drawer.Content>
+						<Drawer.Header>
+							<Drawer.Title>Table of Contents</Drawer.Title>
+							<Drawer.CloseTrigger
+								asChild={(closeProps: unknown) => (
+									<IconButton
+										variant="plain"
+										size="sm"
+										{...(closeProps as Record<string, unknown>)}
+									>
+										<X />
+									</IconButton>
+								)}
+							/>
+						</Drawer.Header>
+						<Drawer.Body>
+							<div
+								style={{
+									display: "flex",
+									"flex-direction": "column",
+									gap: "12px",
+									padding: "16px 0",
+								}}
+							>
+								<For each={props.toc}>
+									{(item) => (
+										<Button
+											variant={
+												pageIndex() === item.pageIndex ? "solid" : "outline"
+											}
+											onClick={() => {
+												setPageIndex(item.pageIndex);
+												setDrawerOpen(false);
+											}}
+											style={{ "justify-content": "flex-start" }}
+										>
+											{item.label}
+										</Button>
+									)}
+								</For>
+							</div>
+						</Drawer.Body>
+					</Drawer.Content>
+				</Drawer.Positioner>
+
+				<main class={classes.stage}>
+					<div class={classes.mobileStageInner}>
+						<ResponsiveImage src={images()[pageIndex()]} />
+					</div>
 					<div class={classes.stageInner}>
 						<For each={papers()}>
 							{(paper) => {
@@ -194,91 +212,101 @@ export default function FlipbookStage(props: FlipbookStageProps) {
 							}}
 						</For>
 					</div>
-				</Show>
-			</main>
+				</main>
 
-			<Show when={pageIndex() > 0}>
-				<button
-					type="button"
-					onClick={prev}
-					class={classes.controlBtn}
-					data-side="left"
-					aria-label="Previous Page"
-				>
-					<ChevronLeft />
-				</button>
-			</Show>
-
-			<Show when={pageIndex() < totalPages() - 1}>
-				<button
-					type="button"
-					onClick={next}
-					class={classes.controlBtn}
-					data-side="right"
-					aria-label="Next Page"
-				>
-					<ChevronRight />
-				</button>
-			</Show>
-
-			<footer class={classes.bottomNav}>
-				<div style={{ "margin-right": "auto", "font-weight": "500" }}>
-					{pageIndex() + 1} / {totalPages()}
-				</div>
-				<div
-					style={{
-						display: "flex",
-						gap: "8px",
-						"margin-left": "auto",
-						"overflow-x": "auto",
-						"max-width": "70%",
-					}}
-				>
-					<Show
-						when={isDesktop()}
-						fallback={
-							<For each={images()}>
-								{(_, index) => (
-									<Button
-										variant={pageIndex() === index() ? "solid" : "plain"}
-										size="sm"
-										onClick={() => setPageIndex(index())}
-									>
-										{index() + 1}
-									</Button>
-								)}
-							</For>
-						}
+				<Show when={pageIndex() > 0}>
+					<button
+						type="button"
+						onClick={prev}
+						class={classes.controlBtn}
+						data-side="left"
+						aria-label="Previous Page"
 					>
-						<For each={papers()}>
-							{(paper) => {
-								const isCurrent = () =>
-									getSpreadIndex(pageIndex()) === paper.index;
-								const label = () => {
-									if (paper.index === 0) return "Cover";
-									if (
-										paper.index === totalPapers() - 1 &&
-										totalPages() % 2 === 0
-									)
-										return "Back";
-									return `P ${paper.index * 2} - ${paper.index * 2 + 1}`;
+						<ChevronLeft />
+					</button>
+				</Show>
+
+				<Show when={pageIndex() < totalPages() - 1}>
+					<button
+						type="button"
+						onClick={next}
+						class={classes.controlBtn}
+						data-side="right"
+						aria-label="Next Page"
+					>
+						<ChevronRight />
+					</button>
+				</Show>
+
+				<footer class={classes.bottomNav}>
+					<div
+						style={{
+							"margin-right": "auto",
+							"font-weight": "500",
+							"min-width": "60px",
+						}}
+					>
+						{pageIndex() + 1} / {totalPages()}
+					</div>
+					<div
+						style={{
+							display: "flex",
+							gap: "8px",
+							"margin-left": "auto",
+							"overflow-x": "auto",
+						}}
+					>
+						<For each={props.toc}>
+							{(item) => {
+								const isCurrent = () => {
+									const currentIndex = pageIndex();
+									const spreadIndex = getSpreadIndex(currentIndex);
+									const itemSpreadIndex = getSpreadIndex(item.pageIndex);
+									return spreadIndex === itemSpreadIndex; // Highlight if on same spread on desktop
 								};
 								return (
 									<Button
 										variant={isCurrent() ? "solid" : "plain"}
 										size="sm"
-										onClick={() =>
-											setPageIndex(getPageIndexFromSpread(paper.index))
-										}
+										onClick={() => setPageIndex(item.pageIndex)}
 									>
-										{label()}
+										{item.label}
 									</Button>
 								);
 							}}
 						</For>
-					</Show>
-				</div>
-			</footer>
-		</div>
+					</div>
+				</footer>
+
+				<footer class={classes.mobileBottomNav}>
+					<IconButton
+						aria-label="Previous"
+						variant="plain"
+						onClick={prev}
+						disabled={pageIndex() === 0}
+					>
+						<ChevronLeft color="white" />
+					</IconButton>
+					<div style={{ "font-weight": "500" }}>
+						{pageIndex() + 1} / {totalPages()}
+					</div>
+					<IconButton
+						aria-label="Next"
+						variant="plain"
+						onClick={next}
+						disabled={pageIndex() === totalPages() - 1}
+					>
+						<ChevronRight color="white" />
+					</IconButton>
+					<IconButton
+						aria-label="Pages"
+						variant="plain"
+						onClick={() => setDrawerOpen(true)}
+					>
+						<LayoutGrid color="white" />
+					</IconButton>
+				</footer>
+			</div>
+		</Drawer.Root>
 	);
 }

@@ -32,7 +32,9 @@ export default function MenuRoute() {
 				</div>
 			}
 		>
-			{(m) => <FlipbookStage title={m().title} images={m().images} />}
+			{(m) => (
+				<FlipbookStage title={m().title} images={m().images} toc={m().toc} />
+			)}
 		</Show>
 	);
 }

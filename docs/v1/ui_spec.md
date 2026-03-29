@@ -17,6 +17,7 @@
 ## Mobile
 
 - Default mode: single-page view. Image must scale to fit remaining viewport height without scrolling.
+- Header: Minimalist and transparent. Use floating icon buttons (e.g., `Close/Back`) overlaid on the top edge to maximize vertical space for the menu image. Do not use a solid, space-consuming app bar.
 - Sticky bottom bar: `Prev` | `1 / N` | `Next` | `Pages`.
 - `Pages` opens a bottom sheet functioning as a Table of Contents with named thumbnails for direct category jumps.
 
